@@ -12,6 +12,7 @@ function App() {
   },[]);
 
   return (
+    
     <>
     <h1>Renderizando imagenes de gatos</h1>
     <img src={catImage} alt="img-cat"/>
