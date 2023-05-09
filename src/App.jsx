@@ -8,6 +8,9 @@ function App() {
 
   const handleNewCatClick = () => {
     setIsFetching(true);
+    setTimeout(() => {
+      setIsFetching(false);
+    }, 10000);
   };
 
   useEffect(() => {
@@ -18,7 +21,10 @@ function App() {
           setCatImage(data[0].url);
           setIsFetching(false);
         })
-        .catch(error => console.error(error));
+        .catch(error => {
+          console.error(error);
+          setIsFetching(false);
+        });
     }
   }, [isFetching]);
 
@@ -31,11 +37,15 @@ function App() {
             imageUrl={catImage}
             title="Gato aleatorio"
             description="Esta es una imagen de un gato aleatorio"
+            buttonLabel="Nuevo gato"
+            onButtonClick={handleNewCatClick} // Agrega la función de manejo de eventos al botón
           />
         )}
-        <button onClick={handleNewCatClick} disabled={isFetching}>
-          {isFetching ? 'Cargando...' : 'Nuevo gato'}
-        </button>
+        {!catImage && (
+          <button onClick={handleNewCatClick} disabled={isFetching}>
+            {isFetching ? 'Cargando...' : 'Nuevo gato'}
+          </button>
+        )}
       </div>
     </div>
   );
