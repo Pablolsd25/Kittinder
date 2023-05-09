@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import CatCard from './Components/CatCard';
 
 function App() {
   const [catImage, setCatImage] = useState('');
@@ -21,10 +22,15 @@ function App() {
   }, [isFetching]);
 
   return (
-    <div>
+    <div className="App">
       <h1>Imágenes de gatos</h1>
-      <img src={catImage} alt="Imagen de gato" />
-      <br />
+      {catImage && (
+        <CatCard
+          imageUrl={catImage}
+          title="Gato aleatorio"
+          description="Esta es una imagen de un gato aleatorio"
+        />
+      )}
       <button onClick={handleNewCatClick} disabled={isFetching}>
         {isFetching ? 'Cargando...' : 'Nuevo gato'}
       </button>

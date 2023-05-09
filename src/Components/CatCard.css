@@ -1,0 +1,21 @@
+.cat-card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+  }
+  
+  .cat-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+  }
+  .card-content {
+    padding: 1rem;
+  }
+  .cat-image {
+    width: 400px;
+    height: 300px;
+    object-fit: cover;
+  }
