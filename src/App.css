@@ -27,7 +27,7 @@
 
 .cat-card img {
   width: 100%;
-  height: 200px; /* establecer un alto fijo */
+  height: 375px; /* establecer un alto fijo */
   object-fit: cover;
   border-radius: 20px;
   margin-bottom: 20px;
