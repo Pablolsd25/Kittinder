@@ -34,7 +34,7 @@ function App() {
   }, [isFetching]);
 
   return (
-    <div className='main-container'>
+    
     <div className="App">
       
         {catImage && (
@@ -48,7 +48,7 @@ function App() {
         )}
       
     </div>
-  </div>
+  
   );
 }
 
