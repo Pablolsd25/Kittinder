@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CatCard from './Components/CatCard';
 import './App.css';
+import mascotasImg from './assets/mascotas.png';
 
 function App() {
   const [catImage, setCatImage] = useState('');
@@ -34,21 +35,18 @@ function App() {
   }, [isFetching]);
 
   return (
-    
     <div className="App">
-      
-        {catImage && (
-          <CatCard
-            imageUrl={catImage}
-            title="Gato aleatorio"
-            description="Esta es una imagen de un gato aleatorio"
-            buttonLabel="Nuevo gato"
-            onButtonClick={handleNewCatClick} // Agrega la función de manejo de eventos al botón
-          />
-        )}
-      
+      {catImage && (
+        <CatCard
+          imageUrl={catImage}
+          title="Gato aleatorio"
+          description="Esta es una imagen de un gato aleatorio"
+          buttonLabel="Nuevo gato"
+          onButtonClick={handleNewCatClick}
+          buttonImage={mascotasImg}
+        />
+      )}
     </div>
-  
   );
 }
 
