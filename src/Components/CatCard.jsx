@@ -1,6 +1,9 @@
 import React from 'react';
 import './CatCard.css';
 import mascotasImg from '../assets/mascotas.png';
+/* import izquierdaImg from '../assets/izquierda.png';
+import derechaImg from '../assets/derecha';
+ */
 
 function CatCard(props) {
   const handleButtonClick = () => {
@@ -14,6 +17,7 @@ function CatCard(props) {
         <div className="card-content">
           <h2>{props.title}</h2>
           <p>{props.description}</p>
+          
           <img
             src={props.buttonImage || mascotasImg}
             alt=""
