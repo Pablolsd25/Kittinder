@@ -1,49 +1,53 @@
 import React, { useState, useEffect } from 'react';
 import CatCard from './Components/CatCard';
 import './App.css';
-import mascotasImg from './assets/mascotas.png';
 
 function App() {
-  const [catImage, setCatImage] = useState('');
-  const [isFetching, setIsFetching] = useState(false);
-
-  const handleNewCatClick = () => {
-    setIsFetching(true);
-  };
+  const [catImages, setCatImages] = useState([]);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [likedImages, setLikedImages] = useState([]);
 
   useEffect(() => {
-    setIsFetching(true);
-    fetch('https://api.thecatapi.com/v1/images/search')
+    fetch('https://api.thecatapi.com/v1/images/search?limit=20')
       .then(response => response.json())
       .then(data => {
-        setCatImage(data[0].url);
-        setIsFetching(false);
+        setCatImages(data.map(cat => cat.url));
       })
       .catch(error => console.error(error));
   }, []);
 
-  useEffect(() => {
-    if (isFetching) {
-      fetch('https://api.thecatapi.com/v1/images/search')
-        .then(response => response.json())
-        .then(data => {
-          setCatImage(data[0].url);
-          setIsFetching(false);
-        })
-        .catch(error => console.error(error));
-    }
-  }, [isFetching]);
+  const handlePrevClick = () => {
+    setCurrentImageIndex(prevIndex => {
+      const lastIndex = catImages.length - 1;
+      const shouldResetIndex = prevIndex === 0;
+      return shouldResetIndex ? lastIndex : prevIndex - 1;
+    });
+  };
+
+  const handleNextClick = () => {
+    setCurrentImageIndex(prevIndex => {
+      const lastIndex = catImages.length - 1;
+      const shouldResetIndex = prevIndex === lastIndex;
+      return shouldResetIndex ? 0 : prevIndex + 1;
+    });
+  };
+
+  const handleLikeClick = () => {
+    setLikedImages(prevLikedImages => [
+      ...prevLikedImages,
+      catImages[currentImageIndex]
+    ]);
+  };
 
   return (
     <div className="App">
-      {catImage && (
+      {catImages.length > 0 && (
         <CatCard
-          imageUrl={catImage}
-          title="Gato aleatorio"
-          description="Esta es una imagen de un gato aleatorio"
-          buttonLabel="Nuevo gato"
-          onButtonClick={handleNewCatClick}
-          buttonImage={mascotasImg}
+          imageUrl={catImages[currentImageIndex]}
+          onPreviousClick={handlePrevClick}
+          onNextClick={handleNextClick}
+          onLikeClick={handleLikeClick}
+          likedImages={likedImages}
         />
       )}
     </div>

@@ -56,3 +56,8 @@
 
 
 
+@media (max-width: 768px) {
+  #root {
+    max-width: 90%;
+  }
+}
