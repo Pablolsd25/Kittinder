@@ -42,11 +42,13 @@ function App() {
 
   return (
     <div className="App">
-      <img 
+      <div className="logo-container">
+      <img
         src={logo}
-        alt='logo-app'
-        className='logo-app'
-        />
+        alt="logo-app"
+        className="logo-app"
+      />
+    </div>
       {catImages.length > 0 && (
         <CatCard
           imageUrl={catImages[currentImageIndex]}
