@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CatCard from './Components/CatCard';
 import './App.css';
+import logo from './assets/logo.png'
 
 function App() {
   const [catImages, setCatImages] = useState([]);
@@ -8,7 +9,7 @@ function App() {
   const [likedImages, setLikedImages] = useState([]);
 
   useEffect(() => {
-    fetch('https://api.thecatapi.com/v1/images/search?limit=20')
+    fetch('https://api.thecatapi.com/v1/images/search?limit=30')
       .then(response => response.json())
       .then(data => {
         setCatImages(data.map(cat => cat.url));
@@ -41,6 +42,11 @@ function App() {
 
   return (
     <div className="App">
+      <img 
+        src={logo}
+        alt='logo-app'
+        className='logo-app'
+        />
       {catImages.length > 0 && (
         <CatCard
           imageUrl={catImages[currentImageIndex]}

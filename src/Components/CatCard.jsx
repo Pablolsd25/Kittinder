@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './CatCard.css';
 import mascotasImg from '../assets/mascotas.png';
 import izquierdaImg from '../assets/izquierda.png';
 import derechaImg from '../assets/derecha.png';
+import corazonImg from '../assets/mascota.png'
 
 function CatCard(props) {
+  const [showHeart, setShowHeart] = useState(false);
+   const [isLiked, setIsLiked] = useState(false);
+
   const handlePreviousClick = () => {
     props.onPreviousClick();
   };
@@ -14,8 +18,14 @@ function CatCard(props) {
   };
 
   const handleLikeClick = () => {
+    setIsLiked(true);
+    setShowHeart(true);
+    setTimeout(() => {
+      setShowHeart(false);
+      props.onNextClick(); // Pasa a la siguiente imagen
+    }, 1000);
     props.onLikeClick();
-  };
+  }
 
   return (
     <div className="cat-card-container">
@@ -29,12 +39,21 @@ function CatCard(props) {
               onClick={handlePreviousClick}
               className="button-image-small"
             />
-            <img
-              src={mascotasImg}
-              alt="Botón de corazón"
-              onClick={handleLikeClick}
-              className="button-image-small heart-button-small"
-            />
+            {showHeart ? (
+  <img
+    src={corazonImg}
+    alt="Corazón"
+    className="button-image-small heart-image-small"
+  />
+) : (
+  <img
+    src={mascotasImg}
+    alt="Botón de corazón"
+    onClick={handleLikeClick}
+    className="button-image-small heart-button-small"
+  />
+)}
+           
             <img
               src={derechaImg}
               alt="Botón de avanzar"
